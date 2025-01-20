@@ -16,7 +16,7 @@ const P1 = () => {
   const scrollRef = useRef(null);
   const buttonRef_next = useRef(null);
   const buttonRef_before = useRef(null);
-  const sentences = paragraph.split(/(?<=[。，\s])/);
+  const sentences = paragraph.split(/(?<=[。，：；])/); 
 
   const handleTextareaChange = (e) => {
     setTextareaContent(e.target.value); 

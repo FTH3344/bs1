@@ -1,21 +1,21 @@
 import React, { useState,useEffect,useRef } from "react";
-import { Upload, Button, message, Row, Typography} from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Button, message, Row, Typography} from "antd";
+
 import TextArea from "antd/es/input/TextArea";
 const { Text } = Typography;
 
 const P1 = () => {
 
 
-  const [loading, setLoading] = useState(false);
   const [textareaContent, setTextareaContent] = useState("");
-  const [textareaContent2, setTextareaContent2] = useState("");
   const [displayedSentences, setDisplayedSentences] = useState([]);
   const [counter, setCounter] = useState(0);
   const [paragraph, setParagraph] = useState("");
   const scrollRef = useRef(null);
   const buttonRef_next = useRef(null);
   const buttonRef_before = useRef(null);
+  const buttonRef_shangchuan = useRef(null);
+  const buttonRef_qingkong= useRef(null);
   const sentences = paragraph.split(/(?<=[。，：；])/); 
 
   const handleTextareaChange = (e) => {
@@ -68,6 +68,16 @@ const P1 = () => {
     //   handleButtonClick_next();
       buttonRef_before.current.click();
     }
+    else if (event.key === 'Enter') {
+
+    //   handleButtonClick_next();
+      buttonRef_shangchuan.current.click();
+    }
+    else if (event.key === 'Backspace' || event.keyCode === 8)  {
+      console.log('left arrow key pressed!');
+    //   handleButtonClick_next();
+      buttonRef_qingkong.current.click();
+    }
   };
 
   useEffect(() => {
@@ -84,7 +94,7 @@ const P1 = () => {
     <div>
       <br />
       <div id="a1" style={{ marginLeft: 10 }}>
-        <div style={{ display: "flex", flexDirection: "column", height: "70vh" }}>
+        <div style={{ display: "flex", flexDirection: "column", height: "80vh" }}>
           <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>
             {displayedSentences.map((sentence, index) => (
               <Text key={index}>{sentence}</Text>
@@ -92,8 +102,7 @@ const P1 = () => {
           </div>
           <br />
           <br />
-          <br />
-          <br />
+
         </div>
         <div>{counter}/{sentences.length}</div>
         <TextArea
@@ -105,8 +114,8 @@ const P1 = () => {
         <Row justify="end">
           <Button ref={buttonRef_before} onClick={handleButtonClick_before}>向前</Button>
           <Button ref={buttonRef_next} onClick={handleButtonClick_next}>向后</Button>
-          <Button onClick={handleButtonClick_displayall}>上传</Button>
-          <Button onClick={clearBtn}>清空</Button>
+          <Button ref={buttonRef_shangchuan} onClick={handleButtonClick_displayall}>上传</Button>
+          <Button ref={buttonRef_qingkong} onClick={clearBtn}>清空</Button>
         </Row>
       </div>
     </div>
